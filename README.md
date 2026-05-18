@@ -22,4 +22,18 @@
 4. Синтез и анализ ресурсов.
 5. Тестовая программа и программно-аппаратная интеграция.
 
-Текущий артефакт этапа 1: [docs/isa_manual.md](docs/isa_manual.md).
+## Текущие артефакты
+
+- Этап 1: [docs/isa_manual.md](docs/isa_manual.md).
+- Пояснение Data Path: [docs/datapath_overview.md](docs/datapath_overview.md).
+- Этап 2, RTL:
+  - [rtl/alu.v](rtl/alu.v)
+  - [rtl/register_file.v](rtl/register_file.v)
+  - [rtl/control_unit.v](rtl/control_unit.v)
+  - [rtl/processor_core.v](rtl/processor_core.v)
+
+## Быстрая проверка RTL
+
+```powershell
+iverilog -g2005 -tnull -s processor_core rtl\alu.v rtl\register_file.v rtl\control_unit.v rtl\processor_core.v
+```
