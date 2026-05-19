@@ -20,6 +20,19 @@ module processor_core_tb;
 
     integer cycle_count;
     integer errors;
+    integer program_last;
+    integer mem_addr;
+    reg [1023:0] waveform_file;
+    reg [1023:0] program_file;
+    reg [15:0] expected_r0;
+    reg [15:0] expected_r1;
+    reg [15:0] expected_r2;
+    reg [15:0] expected_r3;
+    reg [15:0] expected_r4;
+    reg [15:0] expected_r5;
+    reg [15:0] expected_r6;
+    reg [15:0] expected_r7;
+    reg [15:0] expected_mem_value;
 
     processor_core uut (
         .clk(clk),
@@ -55,15 +68,57 @@ module processor_core_tb;
     endtask
 
     initial begin
-        $dumpfile("reports/processor_core_tb.vcd");
-        $dumpvars(0, processor_core_tb);
-
         clk = 1'b0;
         rst = 1'b1;
         cycle_count = 0;
         errors = 0;
 
-        $readmemh("programs/test_program.hex", uut.instr_mem, 0, 14);
+        waveform_file = "reports/processor_core_tb.vcd";
+        program_file = "programs/test_program.hex";
+        program_last = 14;
+        expected_r0 = 16'h0000;
+        expected_r1 = 16'h0005;
+        expected_r2 = 16'h0007;
+        expected_r3 = 16'h000C;
+        expected_r4 = 16'h000C;
+        expected_r5 = 16'h0000;
+        expected_r6 = 16'h0007;
+        expected_r7 = 16'hFFFA;
+        mem_addr = 10;
+        expected_mem_value = 16'h000C;
+
+        if ($value$plusargs("VCD=%s", waveform_file)) begin
+        end
+        if ($value$plusargs("PROGRAM=%s", program_file)) begin
+        end
+        if ($value$plusargs("PROGRAM_LAST=%d", program_last)) begin
+        end
+        if ($value$plusargs("EXPECT_R0=%h", expected_r0)) begin
+        end
+        if ($value$plusargs("EXPECT_R1=%h", expected_r1)) begin
+        end
+        if ($value$plusargs("EXPECT_R2=%h", expected_r2)) begin
+        end
+        if ($value$plusargs("EXPECT_R3=%h", expected_r3)) begin
+        end
+        if ($value$plusargs("EXPECT_R4=%h", expected_r4)) begin
+        end
+        if ($value$plusargs("EXPECT_R5=%h", expected_r5)) begin
+        end
+        if ($value$plusargs("EXPECT_R6=%h", expected_r6)) begin
+        end
+        if ($value$plusargs("EXPECT_R7=%h", expected_r7)) begin
+        end
+        if ($value$plusargs("EXPECT_MEM_ADDR=%d", mem_addr)) begin
+        end
+        if ($value$plusargs("EXPECT_MEM_VALUE=%h", expected_mem_value)) begin
+        end
+
+        $dumpfile(waveform_file);
+        $dumpvars(0, processor_core_tb);
+
+        $display("Loading program: %0s", program_file);
+        $readmemh(program_file, uut.instr_mem, 0, program_last);
 
         repeat (2) @(posedge clk);
         rst = 1'b0;
@@ -80,15 +135,15 @@ module processor_core_tb;
             $display("PASS: processor halted after %0d cycles", cycle_count);
         end
 
-        check16("R0", debug_r0, 16'd0);
-        check16("R1", debug_r1, 16'd5);
-        check16("R2", debug_r2, 16'd7);
-        check16("R3", debug_r3, 16'd12);
-        check16("R4", debug_r4, 16'd12);
-        check16("R5", debug_r5, 16'd0);
-        check16("R6", debug_r6, 16'd7);
-        check16("R7", debug_r7, 16'hFFFA);
-        check16("MEM[10]", uut.data_mem[10], 16'd12);
+        check16("R0", debug_r0, expected_r0);
+        check16("R1", debug_r1, expected_r1);
+        check16("R2", debug_r2, expected_r2);
+        check16("R3", debug_r3, expected_r3);
+        check16("R4", debug_r4, expected_r4);
+        check16("R5", debug_r5, expected_r5);
+        check16("R6", debug_r6, expected_r6);
+        check16("R7", debug_r7, expected_r7);
+        check16("MEM", uut.data_mem[mem_addr], expected_mem_value);
 
         if (errors == 0) begin
             $display("SIMULATION PASSED");

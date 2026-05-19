@@ -26,6 +26,7 @@
 
 - Этап 1: [docs/isa_manual.md](docs/isa_manual.md).
 - Пояснение Data Path: [docs/datapath_overview.md](docs/datapath_overview.md).
+- Использование ассемблера: [docs/assembler_usage.md](docs/assembler_usage.md).
 - Этап 2, RTL:
   - [rtl/alu.v](rtl/alu.v)
   - [rtl/register_file.v](rtl/register_file.v)
@@ -38,6 +39,10 @@
   - [reports/simulation.log](reports/simulation.log)
   - [reports/simulation_report.md](reports/simulation_report.md)
   - [reports/processor_core_tb.vcd](reports/processor_core_tb.vcd)
+- Этап 5, программно-аппаратная интеграция:
+  - [scripts/assembler.py](scripts/assembler.py)
+  - [programs/demo_sub.asm](programs/demo_sub.asm)
+  - [programs/demo_sub.hex](programs/demo_sub.hex)
 
 ## Быстрая проверка RTL
 
@@ -56,4 +61,18 @@ vvp reports\processor_core_tb.vvp
 
 ```text
 SIMULATION PASSED
+```
+
+## Сборка своей программы
+
+Пример для программы `10 - 4`:
+
+```powershell
+python scripts\assembler.py programs\demo_sub.asm programs\demo_sub.hex
+```
+
+Запуск этой программы в тестбенче:
+
+```powershell
+vvp reports\processor_core_tb.vvp +PROGRAM=programs/demo_sub.hex +PROGRAM_LAST=3 +EXPECT_R1=000A +EXPECT_R2=0004 +EXPECT_R3=0006 +EXPECT_R4=0000 +EXPECT_R5=0000 +EXPECT_R6=0000 +EXPECT_R7=0000 +EXPECT_MEM_ADDR=0 +EXPECT_MEM_VALUE=0000 +VCD=reports/demo_sub.vcd
 ```
