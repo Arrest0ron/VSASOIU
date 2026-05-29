@@ -1,0 +1,119 @@
+Flow report for processor_core_tb
+Thu May 21 02:53:54 2026
+Quartus II Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------------+
+; Flow Summary                                                                       ;
++------------------------------------+-----------------------------------------------+
+; Flow Status                        ; Flow Failed - Thu May 21 02:53:54 2026        ;
+; Quartus II Version                 ; 11.0 Build 208 07/03/2011 SP 1 SJ Web Edition ;
+; Revision Name                      ; processor_core_tb                             ;
+; Top-level Entity Name              ; processor_core                                ;
+; Family                             ; Cyclone IV GX                                 ;
+; Total logic elements               ; N/A until Partition Merge                     ;
+;     Total combinational functions  ; N/A until Partition Merge                     ;
+;     Dedicated logic registers      ; N/A until Partition Merge                     ;
+; Total registers                    ; N/A until Partition Merge                     ;
+; Total pins                         ; N/A until Partition Merge                     ;
+; Total virtual pins                 ; N/A until Partition Merge                     ;
+; Total memory bits                  ; N/A until Partition Merge                     ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                     ;
+; Total GXB Receiver Channel PCS     ; N/A until Partition Merge                     ;
+; Total GXB Receiver Channel PMA     ; N/A until Partition Merge                     ;
+; Total GXB Transmitter Channel PCS  ; N/A until Partition Merge                     ;
+; Total GXB Transmitter Channel PMA  ; N/A until Partition Merge                     ;
+; Total PLLs                         ; N/A until Partition Merge                     ;
++------------------------------------+-----------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 05/21/2026 02:53:54 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; processor_core_tb   ;
++-------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                            ;
++--------------------------------------+--------------------------------+-------------------+----------------+----------------+
+; Assignment Name                      ; Value                          ; Default Value     ; Entity Name    ; Section Id     ;
++--------------------------------------+--------------------------------+-------------------+----------------+----------------+
+; COMPILER_SIGNATURE_ID                ; 57562769699238.177932123431392 ; --                ; --             ; --             ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                             ; --                ; --             ; --             ;
+; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; processor_core_tb              ; --                ; --             ; eda_simulation ;
+; EDA_OUTPUT_DATA_FORMAT               ; Vhdl                           ; --                ; --             ; eda_simulation ;
+; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (VHDL)         ; <None>            ; --             ; --             ;
+; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                ; --                ; --             ; eda_simulation ;
+; EDA_TEST_BENCH_FILE                  ; processor_core_tb.v            ; --                ; --             ; --             ;
+; EDA_TEST_BENCH_MODULE_NAME           ; processor_core_tb              ; --                ; --             ; --             ;
+; EDA_TEST_BENCH_NAME                  ; processor_core_tb              ; --                ; --             ; eda_simulation ;
+; PARTITION_COLOR                      ; 16764057                       ; --                ; processor_core ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; PLACEMENT_AND_ROUTING          ; --                ; processor_core ; Top            ;
+; PARTITION_NETLIST_TYPE               ; SOURCE                         ; --                ; processor_core ; Top            ;
+; TOP_LEVEL_ENTITY                     ; processor_core                 ; processor_core_tb ; --             ; --             ;
++--------------------------------------+--------------------------------+-------------------+----------------+----------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                        ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis ; 00:00:00     ; 1.0                     ; 296 MB              ; 00:00:00                           ;
+; Total                ; 00:00:00     ; --                      ; --                  ; 00:00:00                           ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++-----------------------------------------------------------------------------------+
+; Flow OS Summary                                                                   ;
++----------------------+------------------+-----------+------------+----------------+
+; Module Name          ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
++----------------------+------------------+-----------+------------+----------------+
+; Analysis & Synthesis ; DESKTOP-R69C8KB  ; Windows 7 ; 6.2        ; x86_64         ;
++----------------------+------------------+-----------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off processor_core_tb -c processor_core_tb
+
+
+

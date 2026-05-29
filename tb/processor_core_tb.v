@@ -22,6 +22,10 @@ module processor_core_tb;
     integer errors;
     integer program_last;
     integer mem_addr;
+    integer dump_mem_start;
+    integer dump_mem_end;
+    integer dump_i;
+    integer plusarg_found;
     reg [1023:0] waveform_file;
     reg [1023:0] program_file;
     reg [15:0] expected_r0;
@@ -86,33 +90,24 @@ module processor_core_tb;
         expected_r7 = 16'hFFFA;
         mem_addr = 10;
         expected_mem_value = 16'h000C;
+        dump_mem_start = 0;
+        dump_mem_end = -1;
 
-        if ($value$plusargs("VCD=%s", waveform_file)) begin
-        end
-        if ($value$plusargs("PROGRAM=%s", program_file)) begin
-        end
-        if ($value$plusargs("PROGRAM_LAST=%d", program_last)) begin
-        end
-        if ($value$plusargs("EXPECT_R0=%h", expected_r0)) begin
-        end
-        if ($value$plusargs("EXPECT_R1=%h", expected_r1)) begin
-        end
-        if ($value$plusargs("EXPECT_R2=%h", expected_r2)) begin
-        end
-        if ($value$plusargs("EXPECT_R3=%h", expected_r3)) begin
-        end
-        if ($value$plusargs("EXPECT_R4=%h", expected_r4)) begin
-        end
-        if ($value$plusargs("EXPECT_R5=%h", expected_r5)) begin
-        end
-        if ($value$plusargs("EXPECT_R6=%h", expected_r6)) begin
-        end
-        if ($value$plusargs("EXPECT_R7=%h", expected_r7)) begin
-        end
-        if ($value$plusargs("EXPECT_MEM_ADDR=%d", mem_addr)) begin
-        end
-        if ($value$plusargs("EXPECT_MEM_VALUE=%h", expected_mem_value)) begin
-        end
+        plusarg_found = $value$plusargs("VCD=%s", waveform_file);
+        plusarg_found = $value$plusargs("PROGRAM=%s", program_file);
+        plusarg_found = $value$plusargs("PROGRAM_LAST=%d", program_last);
+        plusarg_found = $value$plusargs("EXPECT_R0=%h", expected_r0);
+        plusarg_found = $value$plusargs("EXPECT_R1=%h", expected_r1);
+        plusarg_found = $value$plusargs("EXPECT_R2=%h", expected_r2);
+        plusarg_found = $value$plusargs("EXPECT_R3=%h", expected_r3);
+        plusarg_found = $value$plusargs("EXPECT_R4=%h", expected_r4);
+        plusarg_found = $value$plusargs("EXPECT_R5=%h", expected_r5);
+        plusarg_found = $value$plusargs("EXPECT_R6=%h", expected_r6);
+        plusarg_found = $value$plusargs("EXPECT_R7=%h", expected_r7);
+        plusarg_found = $value$plusargs("EXPECT_MEM_ADDR=%d", mem_addr);
+        plusarg_found = $value$plusargs("EXPECT_MEM_VALUE=%h", expected_mem_value);
+        plusarg_found = $value$plusargs("DUMP_MEM_START=%d", dump_mem_start);
+        plusarg_found = $value$plusargs("DUMP_MEM_END=%d", dump_mem_end);
 
         $dumpfile(waveform_file);
         $dumpvars(0, processor_core_tb);
@@ -144,6 +139,13 @@ module processor_core_tb;
         check16("R6", debug_r6, expected_r6);
         check16("R7", debug_r7, expected_r7);
         check16("MEM", uut.data_mem[mem_addr], expected_mem_value);
+
+        if (dump_mem_end >= dump_mem_start) begin
+            $display("MEMORY DUMP [%0d..%0d]", dump_mem_start, dump_mem_end);
+            for (dump_i = dump_mem_start; dump_i <= dump_mem_end; dump_i = dump_i + 1) begin
+                $display("MEM[%0d] = 0x%04h", dump_i, uut.data_mem[dump_i]);
+            end
+        end
 
         if (errors == 0) begin
             $display("SIMULATION PASSED");
