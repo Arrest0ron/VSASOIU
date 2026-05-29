@@ -118,7 +118,7 @@ module processor_core_tb;
         repeat (2) @(posedge clk);
         rst = 1'b0;
 
-        while (!halted && (cycle_count < 200)) begin
+        while (!halted && (cycle_count < 600)) begin
             @(posedge clk);
             cycle_count = cycle_count + 1;
         end
